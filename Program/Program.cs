@@ -22,11 +22,19 @@ namespace Full_GRASP_And_SOLID
 
             Recipe recipe = new Recipe();
             recipe.FinalProduct = GetProduct("Café con leche");
-            recipe.AddStep(new Step(GetProduct("Café"), 100, GetEquipment("Cafetera"), 120));
-            recipe.AddStep(new Step(GetProduct("Leche"), 200, GetEquipment("Hervidor"), 60));
             try
             {
+                recipe.AddStep(new Step(GetProduct("Café"), 100, GetEquipment("Cafetera"), 120));
+                recipe.AddStep(new Step(GetProduct("Leche"), 200, GetEquipment("Hervidor"), 60));
                 recipe.PrintRecipe();
+            }
+            catch (NullValueException exception)
+            {
+                Console.WriteLine(exception.Message);
+            }
+            catch (LessThanZeroException exception)
+            {
+                Console.WriteLine(exception.Message);
             }
             catch(EmptyStepsListException exception)
             {
@@ -50,12 +58,42 @@ namespace Full_GRASP_And_SOLID
 
         private static void AddProductToCatalog(string description, double unitCost)
         {
-            productCatalog.Add(new Product(description, unitCost));
+            try
+            {
+                productCatalog.Add(new Product(description, unitCost));
+            }
+            catch (NullValueException exception)
+            {
+                Console.WriteLine(exception.Message);
+            }
+            catch (EmptyValueException exception)
+            {
+                Console.WriteLine(exception.Message);
+            }
+            catch (LessThanZeroException exception)
+            {
+                Console.WriteLine(exception.Message);
+            }
         }
 
         private static void AddEquipmentToCatalog(string description, double hourlyCost)
         {
-            equipmentCatalog.Add(new Equipment(description, hourlyCost));
+            try
+            {
+                equipmentCatalog.Add(new Equipment(description, hourlyCost));
+            }
+            catch (NullValueException exception)
+            {
+                Console.WriteLine(exception.Message);
+            }
+            catch (EmptyValueException exception)
+            {
+                Console.WriteLine(exception.Message);
+            }
+            catch (LessThanZeroException exception)
+            {
+                Console.WriteLine(exception.Message);
+            }
         }
 
         private static Product ProductAt(int index)
