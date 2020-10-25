@@ -24,7 +24,18 @@ namespace Full_GRASP_And_SOLID
             recipe.FinalProduct = GetProduct("Café con leche");
             recipe.AddStep(new Step(GetProduct("Café"), 100, GetEquipment("Cafetera"), 120));
             recipe.AddStep(new Step(GetProduct("Leche"), 200, GetEquipment("Hervidor"), 60));
-            recipe.PrintRecipe();
+            try
+            {
+                recipe.PrintRecipe();
+            }
+            catch(EmptyStepsListException exception)
+            {
+                Console.WriteLine(exception.Message);
+            }
+            catch(StepsPrintException exception)
+            {
+                Console.WriteLine(exception.Message);
+            }
         }
 
         private static void PopulateCatalogs()
